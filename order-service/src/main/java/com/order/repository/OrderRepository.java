@@ -1,5 +1,12 @@
 package com.order.repository;
 
-public interface OrderRepository {
+import java.util.UUID;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.order.entity.Order;
+
+@Repository
+public interface OrderRepository extends JpaRepository<Order, UUID> {
 }
