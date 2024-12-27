@@ -3,3 +3,17 @@ spring:
     import: optional:configserver:http://localhost:8888
   application:
     name: discovery-server
+
+server:
+  port: 8761
+
+# eureka:
+#   client:
+#     register-with-eureka: false  # Disable self-registration
+#     fetch-registry: false        # Disable fetching registry
+#   server:
+#     enable-self-preservation: false # Optional: Disable self-preservation during debugging
+
+# spring:
+#   application:
+#     name: discovery-server

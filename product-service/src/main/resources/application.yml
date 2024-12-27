@@ -1,13 +1,6 @@
 spring:
+    config:
+        import: optional:configserver:http://localhost:8888
     application:
         name: product-service
-    data:
-        mongodb:
-            host: localhost
-            port: 27017
-            database: productdb
-            username: myuser
-            password: mypassword
-            authentication-database: admin
-            connection-timeout: 1000ms
-            socket-timeout: 5000ms
+
