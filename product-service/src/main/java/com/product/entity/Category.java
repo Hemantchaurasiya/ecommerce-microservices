@@ -14,6 +14,7 @@ public class Category {
     @Id
     private String id;
     private String name;
+    private String description;
     private List<Product> products; // Can be embedded or referenced by ID
 }
 

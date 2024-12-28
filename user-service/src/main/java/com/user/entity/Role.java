@@ -1,11 +1,14 @@
 package com.user.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
 @Table(name = "roles")
+@Data
 public class Role {
     @Id
     @GeneratedValue

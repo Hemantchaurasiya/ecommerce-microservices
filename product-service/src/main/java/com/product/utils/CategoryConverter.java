@@ -11,8 +11,8 @@ public class CategoryConverter {
     public static Category toCategory(CategoryRequest categoryRequest) {
         Category category = new Category();
         category.setName(categoryRequest.getName());
-        // Since CategoryRequest doesn't have an ID, we leave it empty or handle it later
-        category.setProducts(List.of()); // If products are not part of the request, initialize as empty
+        category.setDescription(categoryRequest.getDescription());
+        category.setProducts(List.of());
         return category;
     }
 
@@ -21,6 +21,7 @@ public class CategoryConverter {
         CategoryResponse categoryResponse = new CategoryResponse();
         categoryResponse.setId(category.getId());
         categoryResponse.setName(category.getName());
+        categoryResponse.setDescription(category.getDescription());
         return categoryResponse;
     }
 }

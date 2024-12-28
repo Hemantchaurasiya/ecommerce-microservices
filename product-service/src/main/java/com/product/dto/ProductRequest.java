@@ -7,11 +7,9 @@ import lombok.Data;
 
 @Data
 public class ProductRequest {
-    private String id;
     private String name;
     private String description;
     private BigDecimal price;
-    private boolean available;
     private String categoryId;
     private List<String> images;
 }
