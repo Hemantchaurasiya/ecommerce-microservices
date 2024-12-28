@@ -11,14 +11,12 @@ import com.product.entity.Category;
 public class ProductConverter {
 
     // Convert ProductRequest to Product
-    public static Product toProduct(ProductRequest productRequest, Category category, Inventory inventory) {
+    public static Product toProduct(ProductRequest productRequest, String categoryId, Inventory inventory) {
         Product product = new Product();
-        product.setId(productRequest.getId());
         product.setName(productRequest.getName());
         product.setDescription(productRequest.getDescription());
         product.setPrice(productRequest.getPrice());
-        product.setAvailable(productRequest.isAvailable());
-        product.setCategory(category); // Assuming category is passed or fetched by ID
+        product.setCategoryId(categoryId); // Assuming category is passed or fetched by ID
         product.setImagesUrl(productRequest.getImages());
         product.setReviews(List.of()); // If reviews are not part of request, initialize as empty
         product.setDiscounts(List.of()); // If discounts are not part of request, initialize as empty
@@ -29,18 +27,16 @@ public class ProductConverter {
     // Convert Product to ProductRequest
     public static ProductRequest toProductRequest(Product product) {
         ProductRequest productRequest = new ProductRequest();
-        productRequest.setId(product.getId());
         productRequest.setName(product.getName());
         productRequest.setDescription(product.getDescription());
         productRequest.setPrice(product.getPrice());
-        productRequest.setAvailable(product.isAvailable());
-        productRequest.setCategoryId(product.getCategory() != null ? product.getCategory().getId() : null);
+        productRequest.setCategoryId(product.getCategoryId() != null ? product.getCategoryId() : null);
         productRequest.setImages(product.getImagesUrl());
         return productRequest;
     }
 
     // Convert Product to ProductResponse
-    public static ProductResponse toProductResponse(Product product) {
+    public static ProductResponse toProductResponse(Product product, Category category) {
         ProductResponse productResponse = new ProductResponse();
         productResponse.setId(product.getId());
         productResponse.setName(product.getName());
@@ -54,8 +50,8 @@ public class ProductConverter {
         productResponse.setImagesUrl(product.getImagesUrl());
         
         // Convert Category to CategoryResponse
-        if (product.getCategory() != null) {
-            productResponse.setCategory(CategoryConverter.toCategoryResponse(product.getCategory()));
+        if (product.getCategoryId() != null) {
+            productResponse.setCategory(CategoryConverter.toCategoryResponse(category));
         }
         
         return productResponse;

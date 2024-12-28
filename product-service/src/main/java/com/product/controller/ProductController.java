@@ -19,34 +19,30 @@ import com.product.dto.ProductResponse;
 import com.product.service.ProductService;
 
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/api/v1/products")
 @Validated
 public class ProductController {
     @Autowired
     private ProductService productService;
 
-    // Get all products
     @GetMapping
     public ResponseEntity<List<ProductResponse>> getAllProducts() {
         List<ProductResponse> products = productService.getAllProducts();
         return ResponseEntity.ok(products);
     }
 
-    // Get product by ID
     @GetMapping("/{id}")
     public ResponseEntity<ProductResponse> getProductById(@PathVariable String id) {
         ProductResponse product = productService.getProductById(id);
         return ResponseEntity.ok(product);
     }
 
-    // Create new product
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<ProductResponse> createProduct(@Validated @RequestBody ProductRequest productRequest) {
         ProductResponse createdProduct = productService.createProduct(productRequest);
         return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
     }
 
-    // Update product
     @PutMapping("/{id}")
     public ResponseEntity<ProductResponse> updateProduct(@PathVariable String id, @Validated @RequestBody ProductRequest productRequest) {
         ProductResponse updatedProduct = productService.updateProduct(id, productRequest);

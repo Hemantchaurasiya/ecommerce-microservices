@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.user.dto.UserRequest;
@@ -15,14 +14,16 @@ import com.user.repository.UserRepository;
 import com.user.service.UserService;
 import com.user.utils.Utils;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Override
-    public UserResponse createUser(UserRequest userRequest) {
-        User user = Utils.toUserEntity(userRequest);
+    public UserResponse registerUser(UserRequest userRegistrationRequest) {
+        User user = Utils.toUserEntity(userRegistrationRequest);
         User savedUser = userRepository.save(user);
         return Utils.toUserResponse(savedUser);
     }

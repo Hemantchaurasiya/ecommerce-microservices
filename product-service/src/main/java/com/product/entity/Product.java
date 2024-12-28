@@ -18,7 +18,7 @@ public class Product {
     private String description;
     private BigDecimal price;
     private boolean available;
-    private Category category; // Embedded or referenced by ID
+    private String categoryId; // Embedded or referenced by ID
     private List<String> imagesUrl;
     private List<ProductReview> reviews; // Embedded documents
     private List<Discount> discounts; // Embedded documents
