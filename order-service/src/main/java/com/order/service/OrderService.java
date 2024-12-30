@@ -7,9 +7,9 @@ import com.order.dto.OrderRequest;
 import com.order.dto.OrderResponse;
 
 public interface OrderService {
-    OrderResponse createOrder(OrderRequest request);
+    OrderResponse placeOrder(OrderRequest request);
     OrderResponse getOrderById(UUID id);
-    List<OrderResponse> getAllOrders();
+    List<OrderResponse> getAllOrdersOfUser(UUID userId);
     OrderResponse updateOrder(UUID id, OrderRequest request);
-    void deleteOrder(UUID id);
+    OrderResponse cancelOrder(UUID id);
 }
