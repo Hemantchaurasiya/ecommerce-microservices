@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   postgresql:
     container_name: postgresql
@@ -28,7 +30,7 @@ services:
     networks:
       - microservices-network
     restart: unless-stopped
-  
+
   zipkin:
     container_name: zipkin
     image: openzipkin/zipkin
@@ -63,7 +65,7 @@ services:
       - ME_CONFIG_MONGODB_AUTHDATABASE=admin
     networks:
       - microservices-network
-  
+
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     container_name: zookeeper
@@ -88,11 +90,11 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
     networks:
       - microservices-network
-  
+
   mail-dev:
     container_name: ms-mail-dev
     image: maildev/maildev
@@ -101,116 +103,116 @@ services:
       - 1025:1025
     networks:
       - microservices-network
-  
-  config-server:
-    build:
-      context: './config-server'
-      dockerfile: Dockerfile
-    ports:
-      - 8888:8888
-    container_name: config-server
-    networks:
-      - microservices-network
-    volumes:
-      - ./config-server:/app
 
-  discovery-server:
-    build:
-      context: './discovery-server'
-      dockerfile: Dockerfile
-    ports:
-      - 8761:8761
-    container_name: discovery-server
-    networks:
-      - microservices-network
-    volumes:
-      - ./discovery-server:/app
+  # config-server:
+  #   build:
+  #     context: './config-server'
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 8888:8888
+  #   container_name: config-server
+  #   networks:
+  #     - microservices-network
+  #   volumes:
+  #     - ./config-server:/app
 
-  user-service:
-    build:
-      context: './user-service'
-      dockerfile: Dockerfile
-    ports:
-      - 1000:1000
-    container_name: user-service
-    networks:
-      - microservices-network
-    volumes:
-      - ./user-service:/app
-    depends_on:
-      - postgresql
-      - config-server
-      - discovery-server
+  # discovery-server:
+  #   build:
+  #     context: './discovery-server'
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 8761:8761
+  #   container_name: discovery-server
+  #   networks:
+  #     - microservices-network
+  #   volumes:
+  #     - ./discovery-server:/app
 
-  product-service:
-    build:
-      context: './product-service'
-      dockerfile: Dockerfile
-    ports:
-      - 2000:2000
-    container_name: product-service
-    networks:
-      - microservices-network
-    volumes:
-      - ./product-service:/app
-    depends_on:
-      - mongodb
-      - config-server
-      - discovery-server
+  # user-service:
+  #   build:
+  #     context: './user-service'
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 1000:1000
+  #   container_name: user-service
+  #   networks:
+  #     - microservices-network
+  #   volumes:
+  #     - ./user-service:/app
+  #   depends_on:
+  #     - postgresql
+  #     - config-server
+  #     - discovery-server
 
-  order-service:
-    build:
-      context: './order-service'
-      dockerfile: Dockerfile
-    ports:
-      - 3000:3000
-    container_name: order-service
-    networks:
-      - microservices-network
-    volumes:
-      - ./order-service:/app
-    depends_on:
-      - postgresql
-      - kafka
-      - user-service
-      - product-service
-      - notification-service
-      - payment-service
+  # product-service:
+  #   build:
+  #     context: './product-service'
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 2000:2000
+  #   container_name: product-service
+  #   networks:
+  #     - microservices-network
+  #   volumes:
+  #     - ./product-service:/app
+  #   depends_on:
+  #     - mongodb
+  #     - config-server
+  #     - discovery-server
 
-  notification-service:
-    build:
-      context: './notification-service'
-      dockerfile: Dockerfile
-    ports:
-      - 4000:4000
-    container_name: notification-service
-    networks:
-      - microservices-network
-    volumes:
-      - ./notification-service:/app
-    depends_on:
-      - mongodb
-      - kafka
-      - config-server
-      - discovery-server
+  # order-service:
+  #   build:
+  #     context: './order-service'
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 3000:3000
+  #   container_name: order-service
+  #   networks:
+  #     - microservices-network
+  #   volumes:
+  #     - ./order-service:/app
+  #   depends_on:
+  #     - postgresql
+  #     - kafka
+  #     - user-service
+  #     - product-service
+  #     - notification-service
+  #     - payment-service
 
-  payment-service:
-    build:
-      context: './payment-service'
-      dockerfile: Dockerfile
-    ports:
-      - 5000:5000
-    container_name: payment-service
-    networks:
-      - microservices-network
-    volumes:
-      - ./payment-service:/app
-    depends_on:
-      - postgresql
-      - kafka
-      - config-server
-      - discovery-server
-  
+  # notification-service:
+  #   build:
+  #     context: './notification-service'
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 4000:4000
+  #   container_name: notification-service
+  #   networks:
+  #     - microservices-network
+  #   volumes:
+  #     - ./notification-service:/app
+  #   depends_on:
+  #     - mongodb
+  #     - kafka
+  #     - config-server
+  #     - discovery-server
+
+  # payment-service:
+  #   build:
+  #     context: './payment-service'
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 5000:5000
+  #   container_name: payment-service
+  #   networks:
+  #     - microservices-network
+  #   volumes:
+  #     - ./payment-service:/app
+  #   depends_on:
+  #     - postgresql
+  #     - kafka
+  #     - config-server
+  #     - discovery-server
+
   # api-gateway:
   #   build:
   #     context: './api-gateway'
