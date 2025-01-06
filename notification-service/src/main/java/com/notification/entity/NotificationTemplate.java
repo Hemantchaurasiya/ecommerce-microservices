@@ -1,5 +1,7 @@
 package com.notification.entity;
 
+import com.notification.enums.NotificationType;
+
 import lombok.Data;
 
 @Data

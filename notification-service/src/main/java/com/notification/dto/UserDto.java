@@ -2,7 +2,7 @@ package com.notification.dto;
 
 import java.util.Map;
 
-import com.notification.entity.NotificationType;
+import com.notification.enums.NotificationType;
 
 import lombok.Data;
 
