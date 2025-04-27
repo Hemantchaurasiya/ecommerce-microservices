@@ -15,6 +15,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserRequest {
+    
     @NotBlank(message = "First name is required")
     private String firstName;
 

@@ -24,6 +24,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/v1/users")
 @Validated
 public class UserController {
+    
     @Autowired
     private UserService userService;
 
