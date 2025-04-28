@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.order.dto.OrderRequest;
 import com.order.dto.OrderResponse;
-import com.order.service.OrderService;
+import com.order.service.abstractions.OrderService;
 
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Path;

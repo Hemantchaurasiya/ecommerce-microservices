@@ -17,10 +17,9 @@ import com.order.entity.Payment;
 import com.order.entity.Shipping;
 
 public class OrderConverter {
-
     public static Order toEntity(OrderRequest request) {
         Order order = new Order();
-        order.setUserId(request.getUserId());
+        order.setUserId(Utils.toUUID(request.getUserId()));
         order.setTotalAmount(request.getTotalAmount());
         order.setStatus(OrderStatus.valueOf(request.getStatus().toUpperCase()));
         order.setOrderItems(request.getOrderItems().stream()
@@ -33,7 +32,7 @@ public class OrderConverter {
 
     private static OrderItem toEntity(OrderItemRequest request) {
         OrderItem item = new OrderItem();
-        item.setProductId(request.getProductId());
+        item.setProductId(Utils.toUUID(request.getProductId()));
         item.setQuantity(request.getQuantity());
         item.setPrice(request.getPrice());
         return item;

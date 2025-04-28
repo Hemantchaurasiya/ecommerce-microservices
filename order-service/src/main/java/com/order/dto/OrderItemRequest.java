@@ -1,13 +1,14 @@
 package com.order.dto;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class OrderItemRequest {
-    private UUID productId;
+    private String productId;
     private Integer quantity;
     private BigDecimal price;
 }

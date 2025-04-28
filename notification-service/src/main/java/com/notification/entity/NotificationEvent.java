@@ -14,3 +14,14 @@ public class NotificationEvent {
     private NotificationType type;
     private NotificationChannel channel;
 }
+
+/* 
+ * {
+  "userId": "user123",
+  "title": "Order Confirmed",
+  "subject": "Your Order is Confirmed",
+  "body": "Your order #1234 has been confirmed successfully!",
+  "type": "ORDER_CONFIRMATION",
+  "channel": "EMAIL"
+}
+ */

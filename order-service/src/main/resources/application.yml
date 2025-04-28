@@ -31,9 +31,7 @@ spring:
     producer:
       bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-      properties:
-        spring.json.type.mapping: orderConfirmation:com
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 management:
   endpoints:
@@ -45,3 +43,16 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://${EUREKA_SERVER_HOST:localhost}:${EUREKA_SERVER_PORT:8761}/eureka/
+
+app:
+  kafka:
+    topic: ${KAFKA_TOPIC:notification-topic}
+    group: ${KAFKA_GROUP:notification-group}
+
+  clients:
+    product-service:
+      name: ${PRODUCT_SERVICE_NAME:product-service}
+      url: ${PRODUCT_SERVICE_URL:http://localhost:2000/api/v1/products}
+    user-service:
+      name: ${USER_SERVICE_NAME:user-service}
+      url: ${USER_SERVICE_URL:http://localhost:1000/api/v1/users}

@@ -7,12 +7,14 @@ import java.util.UUID;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class OrderRequest {
     @NotBlank(message = "User ID is required")
-    private UUID userId;
+    private String userId;
 
     @NotNull(message = "Total amount is required")
     @Min(value = 0, message = "Total amount must be at least 0")
