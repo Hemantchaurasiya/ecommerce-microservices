@@ -1,6 +1,17 @@
 server:
   port: ${SERVER_PORT:8080}
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_SERVER_HOST:localhost}:${EUREKA_SERVER_PORT:8761}/eureka/
+
 spring:
   application:
     name: ${SPRING_APPLICATION_NAME:notification-service}
@@ -19,13 +30,10 @@ spring:
   kafka:
     consumer:
       bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
-      group-id: ${KAFKA_CONSUMER_GROUP_ID:notificationGroup}
+      group-id: ${KAFKA_CONSUMER_GROUP_ID:notification-group}
       auto-offset-reset: ${KAFKA_AUTO_OFFSET_RESET:earliest}
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      properties:
-        spring.json.trusted.packages: ${KAFKA_TRUSTED_PACKAGES:*}
-        spring.json.type.mapping: ${KAFKA_TYPE_MAPPING:orderConfirmation:com}
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 
   mail:
     host: ${MAIL_HOST:localhost}
@@ -43,13 +51,7 @@ spring:
         timeout: ${MAIL_SMTP_TIMEOUT:3000}
         writetimeout: ${MAIL_SMTP_WRITE_TIMEOUT:5000}
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://${EUREKA_SERVER_HOST:localhost}:${EUREKA_SERVER_PORT:8761}/eureka/
+app:
+  kafka:
+    topic: ${KAFKA_TOPIC:notification-topic}
+    group: ${KAFKA_GROUP:notification-group}

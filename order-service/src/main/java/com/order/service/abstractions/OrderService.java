@@ -1,4 +1,4 @@
-package com.order.service;
+package com.order.service.abstractions;
 
 import java.util.List;
 import java.util.UUID;

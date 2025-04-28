@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.order.dto.ProductResponse;
 
-@FeignClient(name = "product-service", url = "http://localhost:2000/api/v1/products")
+@FeignClient(name = "${app.clients.product-service.name}", url = "${app.clients.product-service.url}")
 public interface ProductClient {
 
     @PostMapping("/")
