@@ -1,7 +1,9 @@
 package com.user.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import java.util.Set;
 import java.util.UUID;
@@ -9,6 +11,8 @@ import java.util.UUID;
 @Entity
 @Table(name = "users")
 @Data
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class User {
     
     @Id

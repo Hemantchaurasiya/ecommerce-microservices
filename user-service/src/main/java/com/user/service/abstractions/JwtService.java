@@ -1,4 +1,4 @@
-package com.user.service;
+package com.user.service.abstractions;
 
 import com.user.entity.User;
 

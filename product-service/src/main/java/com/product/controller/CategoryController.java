@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.product.dto.CategoryRequest;
-import com.product.dto.CategoryResponse;
-import com.product.service.CategoryService;
+import com.product.dto.requests.CategoryRequest;
+import com.product.dto.responses.CategoryResponse;
+import com.product.service.abstractions.CategoryService;
 
 import lombok.RequiredArgsConstructor;
 

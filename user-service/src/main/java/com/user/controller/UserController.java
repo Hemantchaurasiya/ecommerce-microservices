@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.user.dto.UserRequest;
-import com.user.dto.UserResponse;
-import com.user.service.UserService;
+import com.user.dto.requests.UserRequest;
+import com.user.dto.responses.UserResponse;
+import com.user.service.abstractions.UserService;
 
 import jakarta.validation.Valid;
 

@@ -1,4 +1,4 @@
-package com.user.service.serviceimpl;
+package com.user.service.implementations;
 
 import java.util.Date;
 
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.user.entity.Role;
 import com.user.entity.User;
-import com.user.service.JwtService;
+import com.user.service.abstractions.JwtService;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
