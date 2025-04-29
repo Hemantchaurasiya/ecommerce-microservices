@@ -1,9 +1,9 @@
-package com.user.service;
+package com.user.service.abstractions;
 
 import java.util.List;
 
-import com.user.dto.UserRequest;
-import com.user.dto.UserResponse;
+import com.user.dto.requests.UserRequest;
+import com.user.dto.responses.UserResponse;
 
 public interface UserService {
     UserResponse registerUser(UserRequest userRegistrationRequest);

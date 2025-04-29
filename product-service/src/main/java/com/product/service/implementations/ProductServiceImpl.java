@@ -1,4 +1,4 @@
-package com.product.service.serviceimpl;
+package com.product.service.implementations;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -6,14 +6,14 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import com.product.dto.ProductRequest;
-import com.product.dto.ProductResponse;
+import com.product.dto.requests.ProductRequest;
+import com.product.dto.responses.ProductResponse;
 import com.product.entity.Category;
 import com.product.entity.Product;
 import com.product.exception.ResourceNotFoundException;
 import com.product.repository.CategoryRepository;
 import com.product.repository.ProductRepsitory;
-import com.product.service.ProductService;
+import com.product.service.abstractions.ProductService;
 import com.product.utils.ProductConverter;
 
 import lombok.AllArgsConstructor;

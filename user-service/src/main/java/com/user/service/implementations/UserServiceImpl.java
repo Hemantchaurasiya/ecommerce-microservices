@@ -1,4 +1,4 @@
-package com.user.service.serviceimpl;
+package com.user.service.implementations;
 
 import java.util.List;
 import java.util.UUID;
@@ -6,12 +6,12 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.user.dto.UserRequest;
-import com.user.dto.UserResponse;
+import com.user.dto.requests.UserRequest;
+import com.user.dto.responses.UserResponse;
 import com.user.entity.User;
 import com.user.exceptions.UserNotFoundException;
 import com.user.repository.UserRepository;
-import com.user.service.UserService;
+import com.user.service.abstractions.UserService;
 import com.user.utils.Utils;
 
 import lombok.RequiredArgsConstructor;

@@ -1,15 +1,15 @@
-package com.product.service.serviceimpl;
+package com.product.service.implementations;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.product.dto.CategoryRequest;
-import com.product.dto.CategoryResponse;
+import com.product.dto.requests.CategoryRequest;
+import com.product.dto.responses.CategoryResponse;
 import com.product.entity.Category;
 import com.product.exception.ResourceNotFoundException;
 import com.product.repository.CategoryRepository;
-import com.product.service.CategoryService;
+import com.product.service.abstractions.CategoryService;
 import com.product.utils.CategoryConverter;
 
 import lombok.RequiredArgsConstructor;
@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
+
     private final CategoryRepository categoryRepository;
     
     @Override
@@ -45,8 +46,10 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryResponse updateCategory(String id, CategoryRequest categoryRequest) {
         Category existingCategory = categoryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + id));
+
         existingCategory.setName(categoryRequest.getName());
         existingCategory.setDescription(categoryRequest.getDescription());
+        
         Category updatedCategory = categoryRepository.save(existingCategory);
         return CategoryConverter.toCategoryResponse(updatedCategory);
     }

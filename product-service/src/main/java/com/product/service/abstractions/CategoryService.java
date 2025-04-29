@@ -1,9 +1,9 @@
-package com.product.service;
+package com.product.service.abstractions;
 
 import java.util.List;
 
-import com.product.dto.CategoryRequest;
-import com.product.dto.CategoryResponse;
+import com.product.dto.requests.CategoryRequest;
+import com.product.dto.responses.CategoryResponse;
 
 public interface CategoryService {
     CategoryResponse createCategory(CategoryRequest categoryRequest);

@@ -2,8 +2,8 @@ package com.product.utils;
 
 import java.util.List;
 
-import com.product.dto.ProductRequest;
-import com.product.dto.ProductResponse;
+import com.product.dto.requests.ProductRequest;
+import com.product.dto.responses.ProductResponse;
 import com.product.entity.Inventory;
 import com.product.entity.Product;
 import com.product.entity.Category;

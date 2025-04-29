@@ -1,7 +1,7 @@
 package com.product.utils;
 
-import com.product.dto.ProductReviewRequest;
-import com.product.dto.ProductReviewResponse;
+import com.product.dto.requests.ProductReviewRequest;
+import com.product.dto.responses.ProductReviewResponse;
 import com.product.entity.ProductReview;
 
 public class ProductReviewConverter {

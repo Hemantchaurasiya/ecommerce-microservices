@@ -1,7 +1,7 @@
-package com.product.service;
+package com.product.service.abstractions;
 
-import com.product.dto.ProductRequest;
-import com.product.dto.ProductResponse;
+import com.product.dto.requests.ProductRequest;
+import com.product.dto.responses.ProductResponse;
 
 import java.util.List;
 

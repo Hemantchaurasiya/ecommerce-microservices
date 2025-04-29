@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.product.dto.ProductRequest;
-import com.product.dto.ProductResponse;
-import com.product.service.ProductService;
+import com.product.dto.requests.ProductRequest;
+import com.product.dto.responses.ProductResponse;
+import com.product.service.abstractions.ProductService;
 
 @RestController
 @RequestMapping("/api/v1/products")
