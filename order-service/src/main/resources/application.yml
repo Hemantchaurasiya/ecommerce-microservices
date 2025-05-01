@@ -52,7 +52,10 @@ app:
   clients:
     product-service:
       name: ${PRODUCT_SERVICE_NAME:product-service}
-      url: ${PRODUCT_SERVICE_URL:http://localhost:2000/api/v1/products}
+      url: ${PRODUCT_SERVICE_URL:http://localhost:6000/api/v1/products}
     user-service:
       name: ${USER_SERVICE_NAME:user-service}
-      url: ${USER_SERVICE_URL:http://localhost:1000/api/v1/users}
+      url: ${USER_SERVICE_URL:http://localhost:6000/api/v1/users}
+    payment-service:
+      name: ${PAYMENT_SERVICE_NAME:payment-service}
+      url: ${PAYMENT_SERVICE_URL:http://localhost:6000/api/v1/payments}

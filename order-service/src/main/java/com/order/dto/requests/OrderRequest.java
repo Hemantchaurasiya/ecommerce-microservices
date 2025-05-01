@@ -1,8 +1,7 @@
-package com.order.dto;
+package com.order.dto.requests;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.UUID;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -13,6 +12,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class OrderRequest {
+    
     @NotBlank(message = "User ID is required")
     private String userId;
 

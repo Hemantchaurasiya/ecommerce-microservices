@@ -31,6 +31,12 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
+    @PostMapping("/ids")
+    public ResponseEntity<List<ProductResponse>> getProductsByProductsIds(@RequestBody List<String> ids) {
+        List<ProductResponse> products = productService.getProductsByProductsIds(ids);
+        return ResponseEntity.ok(products);
+    }
+
     @GetMapping("/category/{categoryId}")
     public ResponseEntity<List<ProductResponse>> getAllProductByCategoryId(@PathVariable String categoryId) {
         System.err.println("category id: " + categoryId);

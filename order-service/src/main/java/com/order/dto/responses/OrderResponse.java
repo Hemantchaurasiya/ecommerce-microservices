@@ -1,16 +1,15 @@
-package com.order.dto;
+package com.order.dto.responses;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 import lombok.Data;
 
 @Data
 public class OrderResponse {
-    private UUID id;
-    private UUID userId;
+    private String id;
+    private String userId;
     private BigDecimal totalAmount;
     private String status;
     private List<OrderItemResponse> orderItems;

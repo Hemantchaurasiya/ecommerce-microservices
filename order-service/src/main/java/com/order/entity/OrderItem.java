@@ -27,7 +27,7 @@ public class OrderItem {
     private Order order;
 
     @Column(nullable = false)
-    private UUID productId; // ID from Product Service
+    private String productId; // ID from Product Service
 
     @Column(nullable = false)
     private String productName; // Snapshot of product name
