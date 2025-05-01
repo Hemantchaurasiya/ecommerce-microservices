@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-import com.order.dto.OrderStatus;
+import com.order.enums.OrderStatus;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -43,8 +43,8 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<OrderItem> orderItems;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Payment payment;
+    // @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    // private Payment payment;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Shipping shipping;

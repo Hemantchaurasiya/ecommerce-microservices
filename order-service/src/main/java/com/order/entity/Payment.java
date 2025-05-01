@@ -1,47 +1,34 @@
 package com.order.entity;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.UUID;
+// @Data
+// @Entity
+// @Table(name = "payments")
+// public class Payment {
+//     @Id
+//     @GeneratedValue
+//     private UUID id;
 
-import com.order.dto.PaymentStatus;
+//     @Column
+//     private String transactionId; // Reference from the Payment Service
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-import lombok.Data;
+//     @Column(nullable = false)
+//     private BigDecimal amount;
 
-@Data
-@Entity
-@Table(name = "payments")
-public class Payment {
-    @Id
-    @GeneratedValue
-    private UUID id;
+//     @Enumerated(EnumType.STRING)
+//     @Column(nullable = false)
+//     private PaymentStatus status;
 
-    @Column(nullable = false)
-    private BigDecimal amount;
+//     @Enumerated(EnumType.STRING)
+//     @Column(nullable = false)
+//     private PaymentMethod method;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private PaymentStatus paymentStatus; // e.g., PENDING, SUCCESS, FAILED
+//     @Column(nullable = false, updatable = false)
+//     private LocalDateTime createdAt;
 
-    @Column
-    private String transactionId; // Reference from the Payment Service
+//     @Column(nullable = false)
+//     private LocalDateTime updatedAt;
 
-    @Column
-    private String paymentMethod; // e.g., CREDIT_CARD, PAYPAL
-
-    @OneToOne(mappedBy = "payment", fetch = FetchType.LAZY)
-    private Order order;
-
-    @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-}
+//     @OneToOne(mappedBy = "payment", fetch = FetchType.LAZY)
+//     private Order order;
+// }
 

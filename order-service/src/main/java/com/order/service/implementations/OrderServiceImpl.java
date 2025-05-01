@@ -9,19 +9,24 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.order.clients.PaymentClient;
 import com.order.clients.ProductClient;
 import com.order.clients.UserClient;
 import com.order.dto.NotificationEvent;
-import com.order.dto.OrderItemRequest;
-import com.order.dto.OrderRequest;
-import com.order.dto.OrderResponse;
-import com.order.dto.OrderStatus;
-import com.order.dto.ProductResponse;
-import com.order.dto.UserResponse;
+import com.order.dto.requests.OrderItemRequest;
+import com.order.dto.requests.OrderRequest;
+import com.order.dto.requests.PaymentRequest;
+import com.order.dto.responses.OrderResponse;
+import com.order.dto.responses.PaymentResponse;
+import com.order.dto.responses.ProductResponse;
+import com.order.dto.responses.UserResponse;
 import com.order.entity.Order;
 import com.order.entity.OrderItem;
+import com.order.entity.Shipping;
 import com.order.enums.NotificationChannel;
 import com.order.enums.NotificationType;
+import com.order.enums.OrderStatus;
+import com.order.enums.PaymentStatus;
 import com.order.exception.ResourceNotFoundException;
 import com.order.repository.OrderRepository;
 import com.order.service.abstractions.OrderService;
@@ -39,6 +44,7 @@ public class OrderServiceImpl implements OrderService {
     private final UserClient userServiceClient;
     private final ProductClient productClient;
     private final NotificationProducer notificationProducer;
+    private final PaymentClient paymentClient;
 
     @Override
     public OrderResponse placeOrder(OrderRequest request) {
@@ -74,7 +80,7 @@ public class OrderServiceImpl implements OrderService {
             }
 
             OrderItem orderItem = new OrderItem();
-            orderItem.setProductId(Utils.toUUID(product.getId()));
+            orderItem.setProductId(product.getId());
             orderItem.setProductName(product.getName());
             orderItem.setPrice(product.getPrice());
             orderItem.setQuantity(orderItemRequest.getQuantity());
@@ -90,16 +96,23 @@ public class OrderServiceImpl implements OrderService {
         // 6. Create Order entity
         Order order = new Order();
         order.setUserId(Utils.toUUID(user.getId()));
-        order.setOrderItems(orderItems);
         order.setTotalAmount(totalPrice);
         order.setStatus(OrderStatus.CONFIRMED);
         order.setCreatedAt(LocalDateTime.now());
+        orderItems.forEach(item -> item.setOrder(order));
+        order.setOrderItems(orderItems);
+        Shipping shipping = new Shipping();
+        shipping.setAddress(request.getShipping().getAddress());
+        shipping.setCity(request.getShipping().getCity());
+        shipping.setCountry(request.getShipping().getCountry());
+        shipping.setPostalCode(request.getShipping().getPostalCode());
+        order.setShipping(shipping);
 
         // 7. Save order
         Order savedOrder = orderRepository.save(order);
 
         // 8. Send notification to user
-        NotificationEvent notificationEvent = new NotificationEvent(
+        NotificationEvent orderNotificationEvent = new NotificationEvent(
             user.getId(),
             "Order Confirmed",
             "Order Confirmation",
@@ -107,7 +120,37 @@ public class OrderServiceImpl implements OrderService {
             NotificationType.ORDER_CONFIRMATION,
             NotificationChannel.EMAIL
         );
-        notificationProducer.sendNotification(notificationEvent);
+        notificationProducer.sendNotification(orderNotificationEvent);
+
+        PaymentRequest paymentRequest = new PaymentRequest();
+        paymentRequest.setOrderId(Utils.toString(savedOrder.getId()));
+        paymentRequest.setAmount(totalPrice);
+        paymentRequest.setPaymentMethod(request.getPayment().getPaymentMethod());
+
+        PaymentResponse paymentResponse = paymentClient.processPayment(paymentRequest);
+
+        if (paymentResponse == null || paymentResponse.getStatus() != PaymentStatus.SUCCESS) {
+            NotificationEvent notificationEvent = new NotificationEvent(
+                user.getId(),
+                "Payment failed",
+                "Payment failed",
+                "Your payment is failed",
+                NotificationType.PAYMENT_FAILED,
+                NotificationChannel.EMAIL
+            );
+            notificationProducer.sendNotification(notificationEvent);
+            throw new RuntimeException("Payment failed!");
+        }
+
+        NotificationEvent paymentNotificationEvent = new NotificationEvent(
+            user.getId(),
+            "Payment done",
+            "Payment sucessfull",
+            "Your payment is sucessfull with transaction id = " + paymentResponse.getTransactionId(),
+            NotificationType.PAYMENT_SUCCESS,
+            NotificationChannel.EMAIL
+        );
+        notificationProducer.sendNotification(paymentNotificationEvent);
 
         // 9. Return order response
         return OrderConverter.toDto(savedOrder);

@@ -1,13 +1,11 @@
-package com.order.dto;
+package com.order.dto.responses;
 
 import java.math.BigDecimal;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
-public class OrderItemRequest {
+public class OrderItemResponse {
     private String productId;
     private Integer quantity;
     private BigDecimal price;

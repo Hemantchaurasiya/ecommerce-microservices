@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.order.dto.ProductResponse;
+import com.order.dto.responses.ProductResponse;
 
 @FeignClient(name = "${app.clients.product-service.name}", url = "${app.clients.product-service.url}")
 public interface ProductClient {
 
-    @PostMapping("/")
+    @PostMapping("/ids")
     List<ProductResponse> getProductsByIdList(@RequestBody List<String> idList);
 
     @PutMapping("/{id}")

@@ -45,6 +45,18 @@ public class ProductServiceImpl implements ProductService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<ProductResponse> getProductsByProductsIds(List<String> ids){
+        List<Product> products = productRepository.findByIdIn(ids);
+        return products.stream()
+                .map(product -> {
+                Category category = categoryRepository.findById(product.getCategoryId())
+                        .orElseThrow(() -> new ResourceNotFoundException("Category not found with ID " + product.getCategoryId()));
+                return ProductConverter.toProductResponse(product, category);
+                })
+                .collect(Collectors.toList());
+    }
+
     public List<ProductResponse> getAllProductByCategoryId(String categoryId) {
         return productRepository.findByCategoryId(categoryId).stream()
                 .map(product -> {

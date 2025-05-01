@@ -3,8 +3,8 @@ package com.order.service.abstractions;
 import java.util.List;
 import java.util.UUID;
 
-import com.order.dto.OrderRequest;
-import com.order.dto.OrderResponse;
+import com.order.dto.requests.OrderRequest;
+import com.order.dto.responses.OrderResponse;
 
 public interface OrderService {
     OrderResponse placeOrder(OrderRequest request);

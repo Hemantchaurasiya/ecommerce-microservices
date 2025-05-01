@@ -3,7 +3,7 @@ package com.order.entity;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import com.order.dto.ShippingStatus;
+import com.order.enums.ShippingStatus;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
