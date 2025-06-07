@@ -1,7 +1,4 @@
-version: "3.8"
-
 services:
-  # ✅ MySQL
   mysql:
     image: mysql:8.0
     container_name: mysql
@@ -19,7 +16,6 @@ services:
     networks:
       - microservices-network
 
-  # ✅ MongoDB
   mongodb:
     image: mongo:6.0
     container_name: mongodb
@@ -34,7 +30,6 @@ services:
     networks:
       - microservices-network
 
-  # ✅ Zookeeper (Bitnami)
   zookeeper:
     image: bitnami/zookeeper:3.9
     container_name: zookeeper
@@ -47,7 +42,6 @@ services:
     networks:
       - microservices-network
 
-  # ✅ Kafka (Bitnami)
   kafka:
     image: bitnami/kafka:3.6
     container_name: kafka
