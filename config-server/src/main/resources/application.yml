@@ -9,7 +9,8 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/Hemantchaurasiya/ecommerce-microservices-configurations.git
+          uri: https://github.com/Hemantchaurasiya/ecommerce-microservices.git
+          searchPaths: config
           skipSslValidation: true
           clone-on-start: true
 
