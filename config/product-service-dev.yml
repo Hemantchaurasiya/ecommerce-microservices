@@ -1,0 +1,10 @@
+server:
+  port: ${SERVER_PORT:2000}
+
+spring:
+  application:
+    name: ${SPRING_APPLICATION_NAME:product-service}
+
+  data:
+    mongodb:
+      uri: ${SPRING_DATA_MONGODB_URI:mongodb://root:root@localhost:27017/product-db?authSource=admin}
